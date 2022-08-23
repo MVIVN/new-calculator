@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+
+#calc-body {
+    background-color: black;
+    opacity: 70%;
+    font-family: 'ABeeZee', sans-serif;
+    width: 500px;
+}
+
+#display {
+    height: auto;
+    width: 500px;
+}
+
+#previous-number {
+    color: white;
+    opacity: 75%;
+    font-size: 1.5rem;
+}
+
+#current-number {
+    color: white;
+    opacity: 95%;
+    font-size: 3.5rem;
+}
+
+#first-row,
+#second-row,
+#third-row,
+#fourth-row {
+    margin: 0 auto;
+}
+
+button {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    font-size: 2.5rem;
+    margin: 10px 5px;
+}
+
+.operator {
+    background-color: green;
+    color: white;
+}
+
+#all-clear {
+    background-color: red;
+    color: white;
+}
+
+#delete {
+    background-color: orangered;
+    color: white;
+}
+
+#history {
+    background-color: black;
+    color: white;
+}
+
+.number {
+    background-color: gray;
+    color: white;
+}
+
+#equals {
+    background-color: lightgreen;
+    min-width: 215px;
+}
