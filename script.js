@@ -15,6 +15,7 @@ const numberBtns = document.querySelectorAll('.number');
 // Input variables
 let currentInputNumber = '';
 let previousInputNumber = '';
+let activeCalculationArray = [];
 
 
 
@@ -27,6 +28,9 @@ for (const number of numberBtns) {
 
 for (const operation of operationBtns) {
     operation.addEventListener('click', function() {
+        activeCalculationArray.push(currentInputNumber);
+        console.log(activeCalculationArray);
+        console.log(activeCalculationArray.length);
         updatePreviousInput(this.textContent);
     });
 }
