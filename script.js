@@ -1,31 +1,31 @@
 // DOM elements
-const previousInput = document.getElementById('previous-input');
-const currentInput = document.getElementById('current-input');
+const previousInputDisplay = document.getElementById('previous-input');
+const currentInputDisplay = document.getElementById('current-input');
 
 const allClearBtn = document.getElementById('all-clear');
 const deleteBtn = document.getElementById('delete');
 const historyBtn = document.getElementById('history');
 const equals = document.getElementById('equals');
 
-const operations = document.querySelectorAll('.operator');
-const numbers = document.querySelectorAll('.number');
+const operationBtns = document.querySelectorAll('.operator');
+const numberBtns = document.querySelectorAll('.number');
 
 
 
 // Input variables
-
+let currentInputNumber = '';
+let previousInputNumber = '';
 
 
 
 // Button event listeners
-for (const number of numbers) {
+for (const number of numberBtns) {
     number.addEventListener('click', function() {
-        anotherString += this.textContent;
-        console.log(anotherString);
+        updateCurrentInput(this.textContent);
     });
 }
 
-for (const operation of operations) {
+for (const operation of operationBtns) {
     operation.addEventListener('click', function() {
         anotherString += ` ${this.textContent} `;
         console.log(anotherString);
@@ -65,6 +65,16 @@ const multiply = function (array) {
 
 const divide = function (array) {
     return array.reduce((total, current) => parseFloat(total) / parseFloat(current))
+};
+
+
+
+// Display functions
+function updateCurrentInput(number) {
+    if (currentInputNumber.length < 16) {
+        currentInputNumber += number;
+    }
+    currentInputDisplay.textContent = currentInputNumber;
 }
 
 
@@ -73,7 +83,7 @@ const divide = function (array) {
 
 
 // tests
-let testString = "12345 + 67890";
+let testString = "10 + 20";
 let testArray = testString.split(" + ");
 console.log(add(testArray));
 console.log(divide(testArray));
