@@ -41,6 +41,11 @@ button {
     font-size: 2.5rem;
     margin: 10px auto;
     border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+}
+
+button:hover {
+    background-color: orange;
 }
 
 .operator {
@@ -53,14 +58,28 @@ button {
     color: white;
 }
 
+#all-clear:hover {
+    background-color: white;
+    color: black;
+}
+
 #delete {
     background-color: orangered;
     color: white;
 }
 
+#delete:hover {
+    background-color: purple;
+}
+
 #history {
     background-color: black;
     color: white;
+}
+
+#history:hover {
+    background-color: greenyellow;
+    color: black;
 }
 
 .number {
@@ -71,4 +90,9 @@ button {
 #equals {
     background-color: lightgreen;
     min-width: 225px;
+}
+
+#equals:hover {
+    background-color: green;
+    color: white;
 }
