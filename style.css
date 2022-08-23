@@ -16,19 +16,21 @@
     color: white;
     opacity: 75%;
     font-size: 1.5rem;
+    padding: 15px;
+    text-align: right;
 }
 
 #current-number {
     color: white;
     opacity: 95%;
     font-size: 3.5rem;
+    padding: 15px;
+    text-align: right;
 }
 
-#first-row,
-#second-row,
-#third-row,
-#fourth-row {
-    margin: 0 auto;
+.button-row {
+    display: flex;
+    justify-content: space-around;
 }
 
 button {
@@ -37,7 +39,8 @@ button {
     min-height: 100px;
     max-height: 100px;
     font-size: 2.5rem;
-    margin: 10px 5px;
+    margin: 10px auto;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .operator {
@@ -67,5 +70,5 @@ button {
 
 #equals {
     background-color: lightgreen;
-    min-width: 215px;
+    min-width: 225px;
 }
