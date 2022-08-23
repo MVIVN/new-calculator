@@ -27,8 +27,7 @@ for (const number of numberBtns) {
 
 for (const operation of operationBtns) {
     operation.addEventListener('click', function() {
-        anotherString += ` ${this.textContent} `;
-        console.log(anotherString);
+        updatePreviousInput(this.textContent);
     });
 }
 
@@ -77,17 +76,23 @@ function updateCurrentInput(number) {
     currentInputDisplay.textContent = currentInputNumber;
 }
 
+function updatePreviousInput(operation) {
+    previousInputNumber += (currentInputNumber += ` ${operation} `);
+    previousInputDisplay.textContent = previousInputNumber;
+    currentInputNumber = '';
+}
+
 
 
 
 
 
 // tests
-let testString = "10 + 20";
-let testArray = testString.split(" + ");
-console.log(add(testArray));
-console.log(divide(testArray));
-console.log(subtract(testArray));
-console.log(multiply(testArray));
+// let testString = "10 + 20";
+// let testArray = testString.split(" + ");
+// console.log(add(testArray));
+// console.log(divide(testArray));
+// console.log(subtract(testArray));
+// console.log(multiply(testArray));
 
-let anotherString = '';
+// let anotherString = '';
