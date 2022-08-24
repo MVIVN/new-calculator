@@ -17,6 +17,7 @@ let currentInputNumber = '';
 let previousInputNumber = '';
 let resultNumber = 0;
 let activeCalculationArray = [];
+let selectedOperator = '';
 
 
 
@@ -29,7 +30,8 @@ for (const number of numberBtns) {
 
 for (const operation of operationBtns) {
     operation.addEventListener('click', function () {
-        console.log(`clicked: ${this.textContent}`);
+        selectedOperator = this.textContent;
+        resultNumber = parseFloat(currentInputNumber);
         activeCalculationArray.push(currentInputNumber, this.textContent);
         updatePreviousInput(this.textContent);
         console.log(activeCalculationArray);
@@ -44,7 +46,13 @@ for (const operation of operationBtns) {
 }
 
 equals.addEventListener('click', function () {
-    console.log(this.textContent);
+    console.log(activeCalculationArray);
+    previousInputDisplay.textContent = `${resultNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
+    calculate(resultNumber, selectedOperator, parseFloat(currentInputNumber));
+    console.log(`resultNumber after clicking '=' is: ${resultNumber}`);
+    currentInputDisplay.textContent = resultNumber;
+    currentInputNumber = '';
+    previousInputNumber = '';
 });
 
 allClearBtn.addEventListener('click', function () {
