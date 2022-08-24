@@ -30,7 +30,7 @@ for (const number of numberBtns) {
 for (const operation of operationBtns) {
     operation.addEventListener('click', function () {
         console.log(`clicked: ${this.textContent}`);
-        activeCalculationArray.push(currentInputNumber);
+        activeCalculationArray.push(currentInputNumber, this.textContent);
         updatePreviousInput(this.textContent);
         console.log(activeCalculationArray);
     });
