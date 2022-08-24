@@ -162,3 +162,9 @@ function clearPreviousInput() {
 // console.log(multiply(testArray));
 
 // let anotherString = '';
+
+// let testString = 'this is just a random string. I will not apologize. you do not know. yes?';
+// console.log(testString[testString.length - 1]);
+// if (testString.includes('.')) {
+//     console.log('there\'s at least one in there, bro.');
+// }
