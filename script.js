@@ -15,39 +15,40 @@ const numberBtns = document.querySelectorAll('.number');
 // Input variables
 let currentInputNumber = '';
 let previousInputNumber = '';
+let resultNumber = 0;
 let activeCalculationArray = [];
 
 
 
 // Button event listeners
 for (const number of numberBtns) {
-    number.addEventListener('click', function() {
+    number.addEventListener('click', function () {
         updateCurrentInput(this.textContent);
     });
 }
 
 for (const operation of operationBtns) {
-    operation.addEventListener('click', function() {
+    operation.addEventListener('click', function () {
+        console.log(`clicked: ${this.textContent}`);
         activeCalculationArray.push(currentInputNumber);
-        console.log(activeCalculationArray);
-        console.log(activeCalculationArray.length);
         updatePreviousInput(this.textContent);
+        console.log(activeCalculationArray);
     });
 }
 
-equals.addEventListener('click', function() {
+equals.addEventListener('click', function () {
     console.log(this.textContent);
 });
 
-allClearBtn.addEventListener('click', function() {
+allClearBtn.addEventListener('click', function () {
     console.log(this.textContent);
 });
 
-deleteBtn.addEventListener('click', function() {
+deleteBtn.addEventListener('click', function () {
     console.log(this.textContent);
 });
 
-historyBtn.addEventListener('click', function() {
+historyBtn.addEventListener('click', function () {
     console.log(this.textContent);
 });
 
@@ -61,7 +62,7 @@ const add = function (array) {
 const subtract = function (array) {
     return array.reduce((total, current) => parseFloat(total) - parseFloat(current));
 };
-  
+
 const multiply = function (array) {
     return array.reduce((total, current) => parseFloat(total) * parseFloat(current));
 };
@@ -69,6 +70,34 @@ const multiply = function (array) {
 const divide = function (array) {
     return array.reduce((total, current) => parseFloat(total) / parseFloat(current))
 };
+
+
+
+// Perform selected calculation
+function performCalculation(operator) {
+    switch (operator) {
+        case '+':
+            console.log(`reduce result (add): ${add(activeCalculationArray)}`);
+            resultNumber = add(activeCalculationArray);
+            activeCalculationArray = [resultNumber];
+            break;
+        case '-':
+            console.log(`reduce result (subtract): ${subtract(activeCalculationArray)}`);
+            resultNumber = subtract(activeCalculationArray);
+            activeCalculationArray = [resultNumber];
+            break;
+        case 'x':
+            console.log(`reduce result (multiply): ${multiply(activeCalculationArray)}`);
+            resultNumber = multiply(activeCalculationArray);
+            activeCalculationArray = [resultNumber];
+            break;
+        case '÷':
+            console.log(`reduce result (divide): ${divide(activeCalculationArray)}`);
+            resultNumber = divide(activeCalculationArray);
+            activeCalculationArray = [resultNumber];
+            break;
+    }
+}
 
 
 
