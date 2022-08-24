@@ -15,7 +15,7 @@ const numberBtns = document.querySelectorAll('.number');
 // Input variables
 let currentInputNumber = '';
 let previousInputNumber = '';
-let resultNumber = 0;
+let activeNumber = '';
 let activeCalculationArray = [];
 let selectedOperator = '';
 
@@ -31,32 +31,53 @@ for (const number of numberBtns) {
 for (const operation of operationBtns) {
     operation.addEventListener('click', function () {
         selectedOperator = this.textContent;
-        resultNumber = parseFloat(currentInputNumber);
-        activeCalculationArray.push(currentInputNumber, this.textContent);
-        updatePreviousInput(this.textContent);
-        console.log(activeCalculationArray);
-        if (activeCalculationArray.length > 3) {
-            calculate(activeCalculationArray[0], activeCalculationArray[1], activeCalculationArray[2]);
-            currentInputNumber = resultNumber;
-            updateCurrentInput(currentInputNumber);
-            clearPreviousInput();
+        activeNumber = parseFloat(currentInputNumber);
+        console.log(activeNumber);
+        if (isNaN(activeNumber)) {
+            return;
+        } else {
+            activeCalculationArray.push(activeNumber, this.textContent);
             updatePreviousInput(this.textContent);
+            console.log(activeCalculationArray);
+            if (activeCalculationArray.length > 3) {
+                calculate(activeCalculationArray[0], activeCalculationArray[1], activeCalculationArray[2]);
+                currentInputNumber = activeNumber;
+                updateCurrentInput(currentInputNumber);
+                clearPreviousInput();
+                updatePreviousInput(this.textContent);
+            }
         }
     });
 }
 
 equals.addEventListener('click', function () {
     console.log(activeCalculationArray);
-    previousInputDisplay.textContent = `${resultNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
-    calculate(resultNumber, selectedOperator, parseFloat(currentInputNumber));
-    console.log(`resultNumber after clicking '=' is: ${resultNumber}`);
-    currentInputDisplay.textContent = resultNumber;
+    console.log(typeof(activeNumber));
+    if (isNaN(activeNumber) || activeNumber === '') {
+        previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over!'
+        return;
+    } else {
+    previousInputDisplay.textContent = `${activeNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
+    calculate(activeNumber, selectedOperator, parseFloat(currentInputNumber));
+    console.log(`resultNumber after clicking '=' is: ${activeNumber}`);
+    console.log('activeCalculationArray after clicking = is:');
+    console.log(activeCalculationArray);
+    currentInputDisplay.textContent = activeNumber;
     currentInputNumber = '';
     previousInputNumber = '';
+    activeCalculationArray = [];
+    }
 });
 
 allClearBtn.addEventListener('click', function () {
-    console.log(this.textContent);
+    currentInputNumber = '';
+    currentInputDisplay.textContent = 0;
+    previousInputNumber = '';
+    previousInputDisplay.textContent = 'Waiting for some numbers to crunch';
+    activeNumber = '';
+    activeCalculationArray = [];
+    selectedOperator = '';
+    console.log('All clear!');
 });
 
 deleteBtn.addEventListener('click', function () {
@@ -69,78 +90,34 @@ historyBtn.addEventListener('click', function () {
 
 
 
-// Operational functions
-
-// const add = function (array) {
-//     return array.reduce((total, current) => parseFloat(total) + parseFloat(current));
-// };
-
-// const subtract = function (array) {
-//     return array.reduce((total, current) => parseFloat(total) - parseFloat(current));
-// };
-
-// const multiply = function (array) {
-//     return array.reduce((total, current) => parseFloat(total) * parseFloat(current));
-// };
-
-// const divide = function (array) {
-//     return array.reduce((total, current) => parseFloat(total) / parseFloat(current))
-// };
-
-
-
 // Calculation function
 function calculate(firstNumber, selectedOperator, secondNumber) {
     switch (selectedOperator) {
         case '+':
-            resultNumber = parseFloat(firstNumber) + parseFloat(secondNumber);
-            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            activeNumber = parseFloat(firstNumber) + parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
             break;
         case '-':
-            resultNumber = parseFloat(firstNumber) - parseFloat(secondNumber);
-            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            activeNumber = parseFloat(firstNumber) - parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
             break;
         case 'x':
-            resultNumber = parseFloat(firstNumber) * parseFloat(secondNumber);
-            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            activetNumber = parseFloat(firstNumber) * parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
             break;
         case '÷':
-            resultNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
-            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
-            break;
+            if (parseFloat(secondNumber) === 0) {
+                previousInputDisplay.textContent = 'Woah, woah, woah! You can\'t do that!';
+                activeNumber = '😓';
+            } else {activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
+                    console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+                    break;
+            }
     }
 
-    activeCalculationArray.splice(0, 3, resultNumber);
+    activeCalculationArray.splice(0, 3, activeNumber);
     console.log(activeCalculationArray);
 }
-
-
-
-// Perform selected calculation
-// function performCalculation(operator) {
-//     switch (operator) {
-//         case '+':
-//             console.log(`reduce result (add): ${add(activeCalculationArray)}`);
-//             resultNumber = add(activeCalculationArray);
-//             activeCalculationArray = [resultNumber];
-//             break;
-//         case '-':
-//             console.log(`reduce result (subtract): ${subtract(activeCalculationArray)}`);
-//             resultNumber = subtract(activeCalculationArray);
-//             activeCalculationArray = [resultNumber];
-//             break;
-//         case 'x':
-//             console.log(`reduce result (multiply): ${multiply(activeCalculationArray)}`);
-//             resultNumber = multiply(activeCalculationArray);
-//             activeCalculationArray = [resultNumber];
-//             break;
-//         case '÷':
-//             console.log(`reduce result (divide): ${divide(activeCalculationArray)}`);
-//             resultNumber = divide(activeCalculationArray);
-//             activeCalculationArray = [resultNumber];
-//             break;
-//     }
-// }
 
 
 
