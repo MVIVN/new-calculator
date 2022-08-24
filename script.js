@@ -33,6 +33,13 @@ for (const operation of operationBtns) {
         activeCalculationArray.push(currentInputNumber, this.textContent);
         updatePreviousInput(this.textContent);
         console.log(activeCalculationArray);
+        if (activeCalculationArray.length > 3) {
+            calculate(activeCalculationArray[0], activeCalculationArray[1], activeCalculationArray[2]);
+            currentInputNumber = resultNumber;
+            updateCurrentInput(currentInputNumber);
+            clearPreviousInput();
+            updatePreviousInput(this.textContent);
+        }
     });
 }
 
@@ -55,49 +62,77 @@ historyBtn.addEventListener('click', function () {
 
 
 // Operational functions
-const add = function (array) {
-    return array.reduce((total, current) => parseFloat(total) + parseFloat(current));
-};
 
-const subtract = function (array) {
-    return array.reduce((total, current) => parseFloat(total) - parseFloat(current));
-};
+// const add = function (array) {
+//     return array.reduce((total, current) => parseFloat(total) + parseFloat(current));
+// };
 
-const multiply = function (array) {
-    return array.reduce((total, current) => parseFloat(total) * parseFloat(current));
-};
+// const subtract = function (array) {
+//     return array.reduce((total, current) => parseFloat(total) - parseFloat(current));
+// };
 
-const divide = function (array) {
-    return array.reduce((total, current) => parseFloat(total) / parseFloat(current))
-};
+// const multiply = function (array) {
+//     return array.reduce((total, current) => parseFloat(total) * parseFloat(current));
+// };
+
+// const divide = function (array) {
+//     return array.reduce((total, current) => parseFloat(total) / parseFloat(current))
+// };
+
+
+
+// Calculation function
+function calculate(firstNumber, selectedOperator, secondNumber) {
+    switch (selectedOperator) {
+        case '+':
+            resultNumber = parseFloat(firstNumber) + parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            break;
+        case '-':
+            resultNumber = parseFloat(firstNumber) - parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            break;
+        case 'x':
+            resultNumber = parseFloat(firstNumber) * parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            break;
+        case '÷':
+            resultNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
+            console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${resultNumber}`);
+            break;
+    }
+
+    activeCalculationArray.splice(0, 3, resultNumber);
+    console.log(activeCalculationArray);
+}
 
 
 
 // Perform selected calculation
-function performCalculation(operator) {
-    switch (operator) {
-        case '+':
-            console.log(`reduce result (add): ${add(activeCalculationArray)}`);
-            resultNumber = add(activeCalculationArray);
-            activeCalculationArray = [resultNumber];
-            break;
-        case '-':
-            console.log(`reduce result (subtract): ${subtract(activeCalculationArray)}`);
-            resultNumber = subtract(activeCalculationArray);
-            activeCalculationArray = [resultNumber];
-            break;
-        case 'x':
-            console.log(`reduce result (multiply): ${multiply(activeCalculationArray)}`);
-            resultNumber = multiply(activeCalculationArray);
-            activeCalculationArray = [resultNumber];
-            break;
-        case '÷':
-            console.log(`reduce result (divide): ${divide(activeCalculationArray)}`);
-            resultNumber = divide(activeCalculationArray);
-            activeCalculationArray = [resultNumber];
-            break;
-    }
-}
+// function performCalculation(operator) {
+//     switch (operator) {
+//         case '+':
+//             console.log(`reduce result (add): ${add(activeCalculationArray)}`);
+//             resultNumber = add(activeCalculationArray);
+//             activeCalculationArray = [resultNumber];
+//             break;
+//         case '-':
+//             console.log(`reduce result (subtract): ${subtract(activeCalculationArray)}`);
+//             resultNumber = subtract(activeCalculationArray);
+//             activeCalculationArray = [resultNumber];
+//             break;
+//         case 'x':
+//             console.log(`reduce result (multiply): ${multiply(activeCalculationArray)}`);
+//             resultNumber = multiply(activeCalculationArray);
+//             activeCalculationArray = [resultNumber];
+//             break;
+//         case '÷':
+//             console.log(`reduce result (divide): ${divide(activeCalculationArray)}`);
+//             resultNumber = divide(activeCalculationArray);
+//             activeCalculationArray = [resultNumber];
+//             break;
+//     }
+// }
 
 
 
@@ -113,6 +148,10 @@ function updatePreviousInput(operation) {
     previousInputNumber += (currentInputNumber += ` ${operation} `);
     previousInputDisplay.textContent = previousInputNumber;
     currentInputNumber = '';
+}
+
+function clearPreviousInput() {
+    previousInputNumber = '';
 }
 
 
