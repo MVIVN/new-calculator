@@ -34,7 +34,8 @@ for (const operation of operationBtns) {
         selectedOperator = this.textContent;
         activeNumber = parseFloat(currentInputNumber);
         console.log(activeNumber);
-        if (isNaN(activeNumber)) {
+        if (isNaN(activeNumber) || typeof(activeNumber) === 'string') {
+            previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over! You can click the HIS button to view history and pick up where you left off.';
             return;
         } else {
             activeCalculationArray.push(activeNumber, this.textContent);
@@ -55,7 +56,7 @@ equals.addEventListener('click', function () {
     console.log(activeCalculationArray);
     console.log(typeof(activeNumber));
     if (isNaN(activeNumber) || activeNumber === '') {
-        previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over!'
+        previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over! You can click the HIS button to view history and pick up where you left off.'
         return;
     } else {
     previousInputDisplay.textContent = `${activeNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
@@ -112,8 +113,9 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
             break;
         case '÷':
             if (parseFloat(secondNumber) === 0) {
-                previousInputDisplay.textContent = 'Woah, woah, woah! You can\'t do that!';
+                previousInputDisplay.textContent = 'Woah, woah, woah! You can\'t do that! Click the AC button to start over, or click the HIS button to view history and continue where you left off.';
                 activeNumber = '😓';
+                console.log(`typeof emojified activeNumber: ${typeof(activeNumber)}`);
                 history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
             } else {activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
                     console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
