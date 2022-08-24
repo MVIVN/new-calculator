@@ -18,6 +18,7 @@ let previousInputNumber = '';
 let activeNumber = '';
 let activeCalculationArray = [];
 let selectedOperator = '';
+let history = [];
 
 
 
@@ -67,6 +68,7 @@ equals.addEventListener('click', function () {
     previousInputNumber = '';
     activeCalculationArray = [];
     }
+    console.table(history);
 });
 
 allClearBtn.addEventListener('click', function () {
@@ -96,21 +98,26 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
         case '+':
             activeNumber = parseFloat(firstNumber) + parseFloat(secondNumber);
             console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+            history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
             break;
         case '-':
             activeNumber = parseFloat(firstNumber) - parseFloat(secondNumber);
             console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+            history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
             break;
         case 'x':
-            activetNumber = parseFloat(firstNumber) * parseFloat(secondNumber);
+            activeNumber = parseFloat(firstNumber) * parseFloat(secondNumber);
             console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+            history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
             break;
         case '÷':
             if (parseFloat(secondNumber) === 0) {
                 previousInputDisplay.textContent = 'Woah, woah, woah! You can\'t do that!';
                 activeNumber = '😓';
+                history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
             } else {activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
                     console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+                    history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
                     break;
             }
     }
