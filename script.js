@@ -44,7 +44,7 @@ for (const operation of operationBtns) {
         if (clickedEquals) {
             currentInputNumber = activeNumber;
         } else if ((activeCalculationArray[1] === '÷') && (currentInputNumber === '0')) {
-            currentInputNumber = 0;
+            calculate(tempNumber, '÷', 0);
         } else {
             activeNumber = parseFloat(currentInputNumber);
         }
