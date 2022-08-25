@@ -19,6 +19,7 @@ let activeNumber = '';
 let activeCalculationArray = [];
 let selectedOperator = '';
 let history = [];
+let clickedEquals = false;
 
 
 
@@ -26,13 +27,19 @@ let history = [];
 for (const number of numberBtns) {
     number.addEventListener('click', function () {
         updateCurrentInput(this.textContent);
+        clickedEquals = false;
     });
 }
 
 for (const operation of operationBtns) {
     operation.addEventListener('click', function () {
         selectedOperator = this.textContent;
-        activeNumber = parseFloat(currentInputNumber);
+        if (clickedEquals) {
+            currentInputNumber = activeNumber;
+        } else {
+            activeNumber = parseFloat(currentInputNumber);
+        }
+        clickedEquals = false; 
         console.log(activeNumber);
         if (isNaN(activeNumber) || typeof(activeNumber) === 'string') {
             previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over! You can click the HIS button to view history and pick up where you left off.';
@@ -53,6 +60,7 @@ for (const operation of operationBtns) {
 }
 
 equals.addEventListener('click', function () {
+    clickedEquals = true;
     console.log(activeCalculationArray);
     console.log(typeof(activeNumber));
     if (isNaN(activeNumber) || activeNumber === '') {
@@ -69,6 +77,7 @@ equals.addEventListener('click', function () {
     previousInputNumber = '';
     activeCalculationArray = [];
     }
+    console.log(`activeNumber = ${activeNumber}`);
     console.table(history);
 });
 
