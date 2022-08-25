@@ -60,11 +60,7 @@ for (const operation of operationBtns) {
             if (activeCalculationArray.length > 3) {
                 calculate(activeCalculationArray[0], activeCalculationArray[1], activeCalculationArray[2]);
                 currentInputNumber = activeNumber;
-                if (toString(currentInputNumber).length > 16) {
-                    currentInputDisplay.textContent = parseFloat(currentInputNumber).toPrecision(5);
-                } else {
-                    currentInputDisplay.textContent = currentInputNumber;
-                }
+                currentInputDisplay.textContent = currentInputNumber;
                 clearPreviousInput();
                 updatePreviousInput(this.textContent);
             }

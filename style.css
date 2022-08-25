@@ -22,6 +22,7 @@
 }
 
 #current-input {
+    overflow-wrap: anywhere;
     color: white;
     opacity: 95%;
     font-size: 3rem;
