@@ -60,7 +60,12 @@ for (const operation of operationBtns) {
             if (activeCalculationArray.length > 3) {
                 calculate(activeCalculationArray[0], activeCalculationArray[1], activeCalculationArray[2]);
                 currentInputNumber = activeNumber;
-                updateCurrentInput(currentInputNumber);
+                console.log(`currentInputNumber.length = ${currentInputNumber.length}`);
+                if (toString(currentInputNumber).length > 16) {
+                    updateCurrentInput(parseFloat(currentInputNumber).toPrecision(5));
+                } else {
+                    updateCurrentInput(currentInputNumber);
+                }
                 clearPreviousInput();
                 updatePreviousInput(this.textContent);
             }
@@ -81,7 +86,12 @@ equals.addEventListener('click', function () {
         console.log(`resultNumber after clicking '=' is: ${activeNumber}`);
         console.log('activeCalculationArray after clicking = is:');
         console.log(activeCalculationArray);
-        currentInputDisplay.textContent = activeNumber;
+        console.log(`activeNumber.length = ${activeNumber.length}`);
+        if (toString(activeNumber).length > 16) {
+            currentInputDisplay.textContent = parseFloat(activeNumber).toPrecision(5);
+        } else {
+            currentInputDisplay.textContent = activeNumber;
+        }
         currentInputNumber = '';
         previousInputNumber = '';
         activeCalculationArray = [];
@@ -154,7 +164,11 @@ function updateCurrentInput(number) {
         currentInputNumber += number;
     }
 
-    currentInputDisplay.textContent = currentInputNumber;
+    if (toString(currentInputNumber).length > 16) {
+        currentInputDisplay.textContent = parseFloat(currentInputNumber).toPrecision(5);
+    } else {
+        currentInputDisplay.textContent = currentInputNumber;
+    }
 
     if ((currentInputNumber[0] === '0') && (currentInputNumber[1] !== '0')) {
         let currentNumSubstring = currentInputNumber.substring(1);
@@ -168,14 +182,18 @@ function updateCurrentInput(number) {
 
 function updatePreviousInput(operation) {
     previousInputNumber += (currentInputNumber += ` ${operation} `);
-    previousInputDisplay.textContent = previousInputNumber;
+    if (previousInputNumber.length > 10) {
+        previousInputDisplay.textContent = parseFloat(previousInputNumber).toPrecision(5);
+    } else {
+        previousInputDisplay.textContent = previousInputNumber;
+    }
+    
     currentInputNumber = '';
 }
 
 function clearPreviousInput() {
     previousInputNumber = '';
 }
-
 
 
 
