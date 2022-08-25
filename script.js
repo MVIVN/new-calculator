@@ -26,8 +26,14 @@ let clickedEquals = false;
 // Button event listeners
 for (const number of numberBtns) {
     number.addEventListener('click', function () {
-        updateCurrentInput(this.textContent);
-        clickedEquals = false;
+        if ((this.textContent === '0') && (currentInputNumber === '0')) {
+            return;
+        } else if ((currentInputNumber.includes('.')) && (this.textContent === '.')) {
+            return;
+        } else {
+            updateCurrentInput(this.textContent);
+            clickedEquals = false;
+        }
     });
 }
 
@@ -39,9 +45,9 @@ for (const operation of operationBtns) {
         } else {
             activeNumber = parseFloat(currentInputNumber);
         }
-        clickedEquals = false; 
+        clickedEquals = false;
         console.log(activeNumber);
-        if (isNaN(activeNumber) || typeof(activeNumber) === 'string') {
+        if (isNaN(activeNumber) || typeof (activeNumber) === 'string') {
             previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over! You can click the HIS button to view history and pick up where you left off.';
             return;
         } else {
@@ -62,20 +68,20 @@ for (const operation of operationBtns) {
 equals.addEventListener('click', function () {
     clickedEquals = true;
     console.log(activeCalculationArray);
-    console.log(typeof(activeNumber));
+    console.log(typeof (activeNumber));
     if (isNaN(activeNumber) || activeNumber === '') {
         previousInputDisplay.textContent = 'Enter some valid input, or click the \'AC\' button to start over! You can click the HIS button to view history and pick up where you left off.'
         return;
     } else {
-    previousInputDisplay.textContent = `${activeNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
-    calculate(activeNumber, selectedOperator, parseFloat(currentInputNumber));
-    console.log(`resultNumber after clicking '=' is: ${activeNumber}`);
-    console.log('activeCalculationArray after clicking = is:');
-    console.log(activeCalculationArray);
-    currentInputDisplay.textContent = activeNumber;
-    currentInputNumber = '';
-    previousInputNumber = '';
-    activeCalculationArray = [];
+        previousInputDisplay.textContent = `${activeNumber} ${selectedOperator} ${parseFloat(currentInputNumber)} = `;
+        calculate(activeNumber, selectedOperator, parseFloat(currentInputNumber));
+        console.log(`resultNumber after clicking '=' is: ${activeNumber}`);
+        console.log('activeCalculationArray after clicking = is:');
+        console.log(activeCalculationArray);
+        currentInputDisplay.textContent = activeNumber;
+        currentInputNumber = '';
+        previousInputNumber = '';
+        activeCalculationArray = [];
     }
     console.log(`activeNumber = ${activeNumber}`);
     console.table(history);
@@ -121,15 +127,16 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
             history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
             break;
         case '÷':
-            if (parseFloat(secondNumber) === 0) {       
+            if (parseFloat(secondNumber) === 0) {
                 previousInputDisplay.textContent = 'Woah! You can\'t divide by zero! 😓 Select a different operation, or click the \'AC\' button to start over. You can also click the HIS button to view history and continue where you left off.';
                 currentInputDisplay.textContent = '😓';
-                console.log(`typeof emojified activeNumber: ${typeof(activeNumber)}`);
+                console.log(`typeof emojified activeNumber: ${typeof (activeNumber)}`);
                 history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
-            } else {activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
-                    console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
-                    history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
-                    break;
+            } else {
+                activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
+                console.log(`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`);
+                history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
+                break;
             }
     }
 
@@ -144,7 +151,13 @@ function updateCurrentInput(number) {
     if (currentInputNumber.length < 16) {
         currentInputNumber += number;
     }
+
     currentInputDisplay.textContent = currentInputNumber;
+
+    if ((currentInputNumber[0] === '0') && (currentInputNumber[1] !== '.')) {
+        let currentNumSubstring = currentInputNumber.substring(1);
+        currentInputNumber = currentNumSubstring;
+    }
 }
 
 function updatePreviousInput(operation) {
