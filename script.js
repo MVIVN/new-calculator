@@ -85,7 +85,7 @@ allClearBtn.addEventListener('click', function () {
     currentInputNumber = '';
     currentInputDisplay.textContent = 0;
     previousInputNumber = '';
-    previousInputDisplay.textContent = 'Waiting for some numbers to crunch';
+    previousInputDisplay.textContent = '🤓 Waiting for some numbers to crunch';
     activeNumber = '';
     activeCalculationArray = [];
     selectedOperator = '';
@@ -121,9 +121,9 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
             history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = ${activeNumber}`));
             break;
         case '÷':
-            if (parseFloat(secondNumber) === 0) {
-                previousInputDisplay.textContent = 'Woah, woah, woah! You can\'t do that! Click the AC button to start over, or click the HIS button to view history and continue where you left off.';
-                activeNumber = '😓';
+            if (parseFloat(secondNumber) === 0) {       
+                previousInputDisplay.textContent = 'Woah! You can\'t divide by zero! 😓 Click the AC button to start over, or click the HIS button to view history and continue where you left off.';
+                currentInputDisplay.textContent = '😓';
                 console.log(`typeof emojified activeNumber: ${typeof(activeNumber)}`);
                 history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
             } else {activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
