@@ -122,7 +122,7 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
             break;
         case '÷':
             if (parseFloat(secondNumber) === 0) {       
-                previousInputDisplay.textContent = 'Woah! You can\'t divide by zero! 😓 Click the AC button to start over, or click the HIS button to view history and continue where you left off.';
+                previousInputDisplay.textContent = 'Woah! You can\'t divide by zero! 😓 Select a different operation, or click the \'AC\' button to start over. You can also click the HIS button to view history and continue where you left off.';
                 currentInputDisplay.textContent = '😓';
                 console.log(`typeof emojified activeNumber: ${typeof(activeNumber)}`);
                 history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
