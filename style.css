@@ -17,16 +17,15 @@
     justify-content: right;
     color: rgb(209, 209, 209);
     font-size: 1.5rem;
-    padding: 25px;
+    padding: 20px;
     text-align: center;
 }
 
 #current-input {
-    overflow-wrap: anywhere;
     color: white;
     opacity: 95%;
-    font-size: 2.5rem;
-    padding: 25px;
+    font-size: 3rem;
+    padding: 20px;
     text-align: right;
 }
 
