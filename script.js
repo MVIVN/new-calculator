@@ -20,6 +20,7 @@ let activeCalculationArray = [];
 let selectedOperator = '';
 let history = [];
 let clickedEquals = false;
+let tempNumber = 0;
 
 
 
@@ -42,6 +43,8 @@ for (const operation of operationBtns) {
         selectedOperator = this.textContent;
         if (clickedEquals) {
             currentInputNumber = activeNumber;
+        } else if ((activeCalculationArray[1] === '÷') && (currentInputNumber === '0')) {
+            currentInputNumber = 0;
         } else {
             activeNumber = parseFloat(currentInputNumber);
         }
@@ -130,7 +133,6 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
             if (parseFloat(secondNumber) === 0) {
                 previousInputDisplay.textContent = 'Woah! You can\'t divide by zero! 😓 Select a different operation, or click the \'AC\' button to start over. You can also click the HIS button to view history and continue where you left off.';
                 currentInputDisplay.textContent = '😓';
-                console.log(`typeof emojified activeNumber: ${typeof (activeNumber)}`);
                 history.push((`${firstNumber} ${selectedOperator} ${secondNumber} = 😓`));
             } else {
                 activeNumber = parseFloat(firstNumber) / parseFloat(secondNumber);
@@ -154,9 +156,13 @@ function updateCurrentInput(number) {
 
     currentInputDisplay.textContent = currentInputNumber;
 
-    if ((currentInputNumber[0] === '0') && (currentInputNumber[1] !== '.')) {
+    if ((currentInputNumber[0] === '0') && (currentInputNumber[1] !== '0')) {
         let currentNumSubstring = currentInputNumber.substring(1);
         currentInputNumber = currentNumSubstring;
+        if (currentInputNumber.length < 1) {
+            currentInputNumber = '0';
+            tempNumber = activeNumber;
+        }
     }
 }
 
