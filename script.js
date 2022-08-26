@@ -82,7 +82,7 @@ equals.addEventListener('click', function () {
         console.log('activeCalculationArray after clicking = is:');
         console.log(activeCalculationArray);
         console.log(`activeNumber.length = ${activeNumber.length}`);
-        if (toString(activeNumber).length > 16) {
+        if (activeNumber.toString().length > 16) {
             currentInputDisplay.textContent = parseFloat(activeNumber).toPrecision(5);
         } else {
             currentInputDisplay.textContent = activeNumber;
