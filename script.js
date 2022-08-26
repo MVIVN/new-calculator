@@ -1,6 +1,8 @@
 // DOM elements
 const previousInputDisplay = document.getElementById('previous-input');
 const currentInputDisplay = document.getElementById('current-input');
+const historyDisplay = document.createElement('div');
+historyDisplay.setAttribute('id', 'history-display');
 
 const allClearBtn = document.getElementById('all-clear');
 const deleteBtn = document.getElementById('delete');
