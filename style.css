@@ -90,6 +90,7 @@ button:hover {
 
 #history-display {
     display: flex;
+    counter-reset: history-counter 0;
     /* flex-direction: column-reverse; */
     flex-direction: column;
     border: 1px solid black;
@@ -103,6 +104,15 @@ button:hover {
     border: 1px solid black;
     font-family: 'ABeeZee', sans-serif;
     font-size: 2.5rem;
+    counter-increment: history-counter;
+}
+
+.history-item:before {
+    content: counter(history-counter) ". ";
+    color: rgba(0, 0, 255, 0.569);
+    font-size: 1.5rem;
+    margin-left: 20px;
+    margin-right: 40px;
 }
 
 .number {

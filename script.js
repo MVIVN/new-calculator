@@ -127,10 +127,13 @@ deleteBtn.addEventListener('click', function () {
 
 historyBtn.addEventListener('click', function () {
     console.log(this.textContent);
-    for (let i = 0, j = 1; i < history.length; i++, j++) {
+    while (historyDisplay.lastElementChild) {
+        historyDisplay.removeChild(historyDisplay.lastElementChild);
+      }
+    for (let i = 0; i < history.length; i++) {
         historyItem = document.createElement('div');
         historyItem.setAttribute('class', 'history-item');
-        historyItem.innerText = j.toLocaleString('en-US', {minimumIntegerDigits: 3}) + '. ' + history[i];
+        historyItem.innerText = history[i];
         historyDisplay.appendChild(historyItem);
     }
 });
