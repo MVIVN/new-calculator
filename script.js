@@ -1,8 +1,16 @@
 // DOM elements
+const calcContainer = document.getElementById('calc-container');
+
 const previousInputDisplay = document.getElementById('previous-input');
 const currentInputDisplay = document.getElementById('current-input');
+
 const historyDisplay = document.createElement('div');
 historyDisplay.setAttribute('id', 'history-display');
+const historyList = document.createElement('div');
+let historyItem = document.createElement('div');
+historyDisplay.appendChild(historyList);
+
+calcContainer.appendChild(historyDisplay);
 
 const allClearBtn = document.getElementById('all-clear');
 const deleteBtn = document.getElementById('delete');
@@ -118,6 +126,10 @@ deleteBtn.addEventListener('click', function () {
 
 historyBtn.addEventListener('click', function () {
     console.log(this.textContent);
+    for (let i = 0; i < (history.length); i++) {
+        historyItem.appendChild(document.createTextNode(history[i]));
+        historyList.appendChild(historyItem);
+    }
 });
 
 
@@ -196,6 +208,9 @@ function clearPreviousInput() {
     previousInputNumber = '';
 }
 
+function addToHistory(calculation) {
+    historyList.appendChild(historyItem);
+}
 
 
 
