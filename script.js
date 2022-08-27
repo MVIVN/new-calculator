@@ -6,9 +6,10 @@ const currentInputDisplay = document.getElementById('current-input');
 
 const historyDisplay = document.createElement('div');
 historyDisplay.setAttribute('id', 'history-display');
-const historyList = document.createElement('div');
+// const historyList = document.createElement('div');
 let historyItem = document.createElement('div');
-historyDisplay.appendChild(historyList);
+historyItem.setAttribute('class', 'history-item');
+// historyDisplay.appendChild(historyList);
 
 calcContainer.appendChild(historyDisplay);
 
@@ -126,9 +127,11 @@ deleteBtn.addEventListener('click', function () {
 
 historyBtn.addEventListener('click', function () {
     console.log(this.textContent);
-    for (let i = 0; i < (history.length); i++) {
-        historyItem.appendChild(document.createTextNode(history[i]));
-        historyList.appendChild(historyItem);
+    for (let i = 0, j = 1; i < history.length; i++, j++) {
+        historyItem = document.createElement('div');
+        historyItem.setAttribute('class', 'history-item');
+        historyItem.innerText = j.toLocaleString('en-US', {minimumIntegerDigits: 3}) + '. ' + history[i];
+        historyDisplay.appendChild(historyItem);
     }
 });
 
