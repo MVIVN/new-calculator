@@ -123,6 +123,12 @@ allClearBtn.addEventListener('click', function () {
 
 deleteBtn.addEventListener('click', function () {
     console.log(this.textContent);
+    if (currentInputNumber.length > 1) {
+        currentInputNumber = currentInputNumber.substring(0, currentInputNumber.length - 1);
+    } else if (currentInputNumber.length <= 1) {
+        currentInputNumber = '0';
+    }
+    currentInputDisplay.textContent = currentInputNumber;
 });
 
 historyBtn.addEventListener('click', function () {
