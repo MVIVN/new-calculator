@@ -1,5 +1,10 @@
 # new-calculator
+
+Live preview: https://mvivn.github.io/new-calculator/
+
 This is my 2nd attempt at building a calculator after botching the first attempt. My first attempt had become extremely convoluted, to the extent that I couldn't even follow my own logic, which made solving problems virtually impossible. This is an attempt to hit the reset button and make a calculator which is written in a more consistent and logical manner, building on the lessons from my first attempt.
+
+This calculator is the final project of The Odin Project's Foundations course.
 
 # Update: Monday 29 August 2022
 After a lot of trials and tribulations, my calculator is finally complete. I was able to successfully impelent a history button and confirmed that all aspects of the calculator are working as expected, and meet all the required criteria set out by the assignment.
