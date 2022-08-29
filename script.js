@@ -127,15 +127,7 @@ deleteBtn.addEventListener('click', function () {
 
 historyBtn.addEventListener('click', function () {
     console.log(this.textContent);
-    while (historyDisplay.lastElementChild) {
-        historyDisplay.removeChild(historyDisplay.lastElementChild);
-      }
-    for (let i = 0; i < history.length; i++) {
-        historyItem = document.createElement('div');
-        historyItem.setAttribute('class', 'history-item');
-        historyItem.innerText = history[i];
-        historyDisplay.appendChild(historyItem);
-    }
+    updateHistory();
 });
 
 
@@ -172,6 +164,7 @@ function calculate(firstNumber, selectedOperator, secondNumber) {
     }
 
     activeCalculationArray.splice(0, 3, activeNumber);
+    updateHistory();
     console.log(activeCalculationArray);
 }
 
@@ -214,8 +207,16 @@ function clearPreviousInput() {
     previousInputNumber = '';
 }
 
-function addToHistory(calculation) {
-    historyList.appendChild(historyItem);
+function updateHistory() {
+    while (historyDisplay.lastElementChild) {
+        historyDisplay.removeChild(historyDisplay.lastElementChild);
+      }
+    for (let i = 0; i < history.length; i++) {
+        historyItem = document.createElement('div');
+        historyItem.setAttribute('class', 'history-item');
+        historyItem.innerText = history[i];
+        historyDisplay.appendChild(historyItem);
+    }
 }
 
 
