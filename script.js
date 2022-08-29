@@ -132,7 +132,7 @@ deleteBtn.addEventListener('click', function () {
 });
 
 historyBtn.addEventListener('click', function () {
-    console.log(this.textContent);
+    historyDisplay.classList.toggle('history-slide');
     updateHistory();
 });
 

@@ -6,7 +6,7 @@
 
 #calc-body {
     background-color: black;
-    opacity: 70%;
+    /* opacity: 70%; */
     font-family: 'ABeeZee', sans-serif;
     width: 500px;
 }
@@ -91,14 +91,22 @@ button:hover {
 #history-display {
     display: flex;
     counter-reset: history-counter 0;
-    /* flex-direction: column-reverse; */
     flex-direction: column;
     border: 1px solid black;
     background-image: linear-gradient(to bottom, #000428, #004e92);
     color: rgba(255, 255, 255, 0.767);
-    width: 500px;
-    height: 760px;
+    width: 498px;
+    height: 757px;
     overflow-y: scroll;
+    position: absolute;
+    z-index: -1;
+    transition: all 0.5s;
+}
+
+.history-slide {
+    transition: all 0.5s;
+    animation: slide 0.5s forwards;
+    left: 508px;
 }
 
 .history-item {
